@@ -91,13 +91,26 @@ public class LinkedList {
         return -1;
 	}
 
+	public static Node reverse(Node head) {
+		if(head == null || head.next == null)
+			return head;
+		Node prev = null, curr = head, next = curr;
+		while(curr != null) {
+			next = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
+		}
+		return prev;
+	}
+
 	public static void printList(Node head) {
 		Node n = head;
 		while(n != null) {
-			System.out.print(n.data + " --> ");
+			System.out.print(n.data + " ");
 			n = n.next;
 		}
-		System.out.println("NULL");
+		System.out.println();
 	}
 
 
@@ -112,6 +125,9 @@ public class LinkedList {
 
 		head = delTail(head);
 		head = insertAtPos(head,5,7);
+		printList(head);
+
+		head = reverse(head);
 		printList(head);
 
 		System.out.println(searchElem(head,23));
